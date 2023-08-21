@@ -1,0 +1,13 @@
+setwd("C:\\Users\\tinah\\OneDrive\\桌面\\成大\\科學計算機軟體\\final")
+getwd()
+data <- read.csv("data.csv")
+View(data)
+library("Hmisc") 
+library("olsrr")
+rcorr(as.matrix(data[ , 5:12]), type=c("spearman"))
+model <- lm(ff_avg_spin轉速 ~ xslg被長打率 + launch_angle_avg擊球仰角 + hard_hit_percent強擊球率 + 
+z_swing_miss_percent揮空率 + groundballs_percent滾地球比 + flyballs_percent飛球比, data= data)
+ols_step_both_p(model, penter = 0.05, prem = 0.1 , details = TRUE)
+mode2 <- lm(ff_avg_spin轉速 ~ xslg被長打率 + launch_angle_avg擊球仰角 + z_swing_miss_percent揮空率, data= data)
+ols_coll_diag(mode2)
+summary(mode2)
